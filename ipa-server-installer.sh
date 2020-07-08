@@ -4,7 +4,7 @@ IPETH0=$(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d '/' -f1)
 echo "$IPETH0 $(hostname -f) $(hostname -s)" >> /etc/hosts
 REVZONE=$(echo $IPETH0 | awk -F. '{print $3"." $2"."$1}')'.in-addr.arpa.'
 
-ipa-server-install -p '1q2w#E$R' -a '1q2w#E$R' -n 'yo.virt' -r 'YO.VIRT' --hostname="$(hostname -f)" --setup-dns --reverse-zone="$REVZONE" --mkhomedir --no-dns-sshfp --forwarder='8.8.8.8' --forwarder='8.8.4.4'
+ipa-server-install -p '1q2w#E$R' -a '1q2w#E$R' -n 'yo.virt' -r 'YO.VIRT' --hostname="$(hostname -f)" --setup-dns --reverse-zone="$REVZONE" --mkhomedir -N --no-dns-sshfp --forwarder='8.8.8.8' --forwarder='8.8.4.4'
 
 #   Basic options:
 #     -p DM_PASSWORD, --ds-password=DM_PASSWORD
