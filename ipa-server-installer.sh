@@ -12,9 +12,9 @@ fi
 # shellcheck source=/dev/null
 source "$SCRIPTDIR"/vars.cfg
 
-IPETH0=$(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d '/' -f1)
+IPETH0=$(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | awk -F/ '{print $1}')
 echo "$IPETH0 $(hostname -f) $(hostname -s)" >> /etc/hosts
-REVZONE=$(echo $IPETH0 | awk -F. '{print $3"." $2"."$1}')'.in-addr.arpa.'
+REVZONE=$(echo "$IPETH0" | awk -F. '{print $3"." $2"."$1}')'.in-addr.arpa.'
 
 #ipa-server-install -p "$DMPASS" -a "$ADMINPASS" -n "$DOMAIN" -r "${REALM^^}" --hostname="$(hostname -f)" --setup-dns --reverse-zone="$REVZONE" --mkhomedir -N --no-dns-sshfp --forwarder="$DNSFORWARDER1" --forwarder="$DNSFORWARDER2" -U
 ipa-server-install -p "$DMPASS" -a "$ADMINPASS" -n "$DOMAIN" -r "${REALM^^}" --hostname="$(hostname -f)" --setup-dns --auto-reverse --mkhomedir -N --no-dns-sshfp --forwarder="$DNSFORWARDER1" --forwarder="$DNSFORWARDER2" -U
