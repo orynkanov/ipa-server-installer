@@ -24,6 +24,7 @@ firewall-cmd --permanent --add-service=dns
 firewall-cmd --add-service=ntp
 firewall-cmd --permanent --add-service=ntp
 
+dnf module reset idm -y
 dnf module install idm:DL1/dns -y
 
 #REVZONE=$(echo "$IPETH0" | awk -F. '{print $3"." $2"."$1}')'.in-addr.arpa.'
