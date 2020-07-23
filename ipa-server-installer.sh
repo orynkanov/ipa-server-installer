@@ -24,6 +24,8 @@ firewall-cmd --permanent --add-service=dns
 firewall-cmd --add-service=ntp
 firewall-cmd --permanent --add-service=ntp
 
+dnf module install idm:DL1/dns -y
+
 #REVZONE=$(echo "$IPETH0" | awk -F. '{print $3"." $2"."$1}')'.in-addr.arpa.'
 #ipa-server-install -p "$DMPASS" -a "$ADMINPASS" -n "$DOMAIN" -r "${REALM^^}" --hostname="$(hostname -f)" --setup-dns --reverse-zone="$REVZONE" --mkhomedir -N --no-dns-sshfp --forwarder="$DNSFORWARDER1" --forwarder="$DNSFORWARDER2" -U
 
