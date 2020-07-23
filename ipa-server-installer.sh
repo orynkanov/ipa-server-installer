@@ -15,15 +15,6 @@ source "$SCRIPTDIR"/vars.cfg
 IPETH0=$(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | awk -F/ '{print $1}')
 echo "$IPETH0 $(hostname -f) $(hostname -s)" >> /etc/hosts
 
-firewall-cmd --add-service=freeipa-4
-firewall-cmd --permanent --add-service=freeipa-4
-
-firewall-cmd --add-service=dns
-firewall-cmd --permanent --add-service=dns
-
-firewall-cmd --add-service=ntp
-firewall-cmd --permanent --add-service=ntp
-
 dnf module reset idm -y
 dnf module install idm:DL1/dns -y
 
