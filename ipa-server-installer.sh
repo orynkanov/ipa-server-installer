@@ -31,7 +31,7 @@ firewall-cmd --permanent --add-service=ntp
     echo "DMPASS=$DMPASS"
     "ADMINPASS=$ADMINPASS"
     "DOMAIN=$DOMAIN"
-    "REALM=${REALM^^}" > /root/ipa-server-installer.txt
-}
+    "REALM=${REALM^^}"
+} > /root/ipa-server-installer.txt
 
 ipa-server-install -p "$DMPASS" -a "$ADMINPASS" -n "$DOMAIN" -r "${REALM^^}" --hostname="$(hostname -f)" --setup-dns --auto-reverse --mkhomedir -N --no-dns-sshfp --forwarder="$DNSFORWARDER1" --forwarder="$DNSFORWARDER2" -U
